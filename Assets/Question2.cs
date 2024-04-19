@@ -33,6 +33,9 @@ public class Question2 : MonoBehaviour
      * Using Unity's built in Intersect function we determine if the boxes overlap and return the result
      * if both boxes inputted are not null.
      * 
-     * To test that this works, we can place two objects with bound boxes in a Unity scene adn run the method at various angles, overlapping and not overlapping. To make testing faster, we could even run the method every Update or FixedUpdate and Debug.Log the results as we move the objects around the scene.
+     * To test that this works, we can place two objects with bound boxes in a Unity scene and run the
+     * method at various angles, overlapping and not overlapping. To make testing faster, we could even 
+     * run the method every Update or FixedUpdate and Debug.Log the results as we move the objects around
+     * the scene.
      */
 }
