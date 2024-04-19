@@ -12,7 +12,8 @@ public class RPGCharacter
 
     int totalExperience;
     int currentLevel;
-    int levelUpExp = 1000; //Amount of exp needed to level up
+    int baseLevelUpExp = 1000;
+    int currentLevelUpExp = 1000; //Amount of exp needed to level up
 
     public List<BaseSpell> activeSpells = new List<BaseSpell>();
     public void TakeTurn()
@@ -35,20 +36,31 @@ public class RPGCharacter
 
     public void GainExperience(int gainedExp)
     {
-        int previousExp = totalExperience;
-
         totalExperience += gainedExp;
 
-        //Check if exp is enough to level up
-        if(totalExperience >= levelUpExp * currentLevel)
-        {
-            //How many levels to level up
-            int levels = totalExperience - (levelUpExp * currentLevel - 1) / levelUpExp;
+        currentLevelUpExp -= gainedExp;
 
-            for (int i = 0; i < levels; i++)
-            {
-                LevelUp();
-            }
+        while(currentLevelUpExp > 0) //Is it enough to level up?
+        {
+            LevelUp();
+            int expOverLevel = Mathf.Abs(currentLevelUpExp); //Get the overage
+            currentLevelUpExp = baseLevelUpExp; //Reset value
+            currentLevelUpExp -= expOverLevel; //Subtract overage 
+        }
+    }
+
+    public void UpdatedGainExp(int gainedExp)
+    {
+        totalExperience += gainedExp;
+
+        currentLevelUpExp -= gainedExp;
+
+        while (currentLevelUpExp > 0) //Is it enough to level up?
+        {
+            LevelUp();
+            int expOverLevel = Mathf.Abs(currentLevelUpExp); //Get the overage
+            currentLevelUpExp = currentLevel * baseLevelUpExp; //Reset value
+            currentLevelUpExp -= expOverLevel; //Subtract overage 
         }
     }
 
