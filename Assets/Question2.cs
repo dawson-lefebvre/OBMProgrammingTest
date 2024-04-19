@@ -18,6 +18,10 @@ public class Question2 : MonoBehaviour
             }
             else { return false; }
         }
+        else if (box1 == null && box2 == null)
+        {
+            Debug.LogError("DoBoundsOverlap Error: Both boxes are null");
+        }
         else if (box1 == null)
         {
             Debug.LogError("DoBoundsOverlap Error: box1 is null");
@@ -26,6 +30,7 @@ public class Question2 : MonoBehaviour
         {
             Debug.LogError("DoBoundsOverlap Error: box2 is null");
         }
+      
         return false;
     }
 
